@@ -11,7 +11,11 @@ export function MemoryGame() {
   const [won, setWon] = useState(false);
   const handleSizeChange = (e) => {
     const size = parseInt(e.target.value);
-    if (size >= 2 && size <= 10) setGridSize(size);
+    if (size >= 0 && size <= 10) {
+      setGridSize(size);
+    } else if (e.target.value === "") {
+      setGridSize(""); // Allow clearing the input field
+    }
   };
 
   const intializeGame = () => {
@@ -85,7 +89,7 @@ export function MemoryGame() {
       <div className="flex flex-col items-center justify-center w-screen h-screen">
         <div>
           {/* input */}
-          <label htmlFor="gridSize"> Grid Size: (max 10)</label>
+          <label htmlFor="gridSize">Grid Size: (max 10)</label>
           <input
             type="number"
             className="border-2 border-gray-300 rounded px-2 py-1"
@@ -95,7 +99,7 @@ export function MemoryGame() {
             value={gridSize}
             onChange={handleSizeChange}
           />
-          <label htmlFor="maxMoves" className="pl-3">
+          <label htmlFor="maxMoves" className="">
             Max Moves:{" "}
           </label>
           <input
